@@ -1,1 +1,3 @@
-console.log('working');
+import UI from './modules/UI';
+
+UI.init();
