@@ -7,7 +7,7 @@ const UI = (() => {
   const $temp = document.querySelector('.temperature');
   const $feelsLikeTemp = document.querySelector('.feels-like-temp');
   const $unitSelector = document.querySelector('.unit-selector');
-  // const $weatherIcon = document.querySelector('.weather-icon');
+  const $weatherIcon = document.querySelector('.weather-icon');
 
   const body = document.querySelector('body');
 
@@ -34,10 +34,11 @@ const UI = (() => {
 
   const updateDOM = () => {
     updateTemperatureDOM();
-    // const forecast = Forecast.getForecast();
-    // const weatherIcon = document.createElement('img');
-    // weatherIcon.src = `http://openweathermap.org/img/w/${forecast.id}.png`;
-    // $weatherIcon.appendChild(weatherIcon);
+    const forecast = Forecast.getForecast();
+    const weatherIcon = document.createElement('img');
+    weatherIcon.src = `http://openweathermap.org/img/w/${forecast.icon}.png`;
+    if ($weatherIcon.childElementCount) $weatherIcon.lastChild.remove();
+    $weatherIcon.appendChild(weatherIcon);
   };
 
   const populateWeather = async () => {

@@ -16,8 +16,8 @@ const Forecast = (() => {
       forecast.temp = weatherData.main.temp - 273.15;
       forecast.feelsLike = weatherData.main.feels_like - 273.15;
       forecast.humidity = weatherData.main.humidity;
-      forecast.id = weatherData.main.id;
       forecast.main = weatherData.weather[0].main;
+      forecast.icon = weatherData.weather[0].icon;
       return true;
     } catch (err) {
       return false;
