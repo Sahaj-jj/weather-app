@@ -11,11 +11,17 @@ const Forecast = (() => {
   const loadContents = async (cityName) => {
     forecast.unit = 'C';
     forecast.city = cityName;
-    const weatherData = await Weather.getData(cityName);
-    forecast.temp = weatherData.main.temp - 273.15;
-    forecast.feelsLike = weatherData.main.feels_like - 273.15;
-    forecast.humidity = weatherData.main.humidity;
-    forecast.main = weatherData.weather[0].main;
+    try {
+      const weatherData = await Weather.getData(cityName);
+      forecast.temp = weatherData.main.temp - 273.15;
+      forecast.feelsLike = weatherData.main.feels_like - 273.15;
+      forecast.humidity = weatherData.main.humidity;
+      forecast.id = weatherData.main.id;
+      forecast.main = weatherData.weather[0].main;
+      return true;
+    } catch (err) {
+      return false;
+    }
   };
 
   const toggleUnit = () => {
