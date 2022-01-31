@@ -5,6 +5,13 @@ const changeUnit = (num, currentUnit) => {
   return (num - 32) * (5 / 9);
 };
 
+const getDate = (dt, timezone) => {
+  const date = new Date(dt * 1000 + (timezone * 1000));
+  date.setHours(date.getHours() - 5);
+  date.setMinutes(date.getMinutes() - 30);
+  return date.toLocaleTimeString();
+};
+
 const Forecast = (() => {
   const forecast = {};
 
@@ -21,7 +28,7 @@ const Forecast = (() => {
       // location-info
       forecast.main = weatherData.weather[0].main;
       forecast.country = weatherData.sys.country;
-      forecast.time = new Date().toLocaleTimeString();
+      forecast.time = getDate(weatherData.dt, weatherData.timezone);
       // extra-info
       forecast.tempMax = weatherData.main.temp_max - 273.15;
       forecast.tempMin = weatherData.main.temp_min - 273.15;

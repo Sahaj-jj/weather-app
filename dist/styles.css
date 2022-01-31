@@ -6,7 +6,7 @@
 	--accent: rgb(236, 98, 121);
 	--subtext: grey;
 	--inverse-subtext: rgba(255, 255, 255, 0.7);
-	--input: rgb(190, 165, 165);
+	--input: rgb(112, 65, 73);
 }
 
 *,
@@ -56,14 +56,20 @@ input[type="text"] {
 	font-weight: bold;
 }
 
+input[type="text"]::placeholder {
+	color: white;
+	opacity: 0.3;
+}
+
 .search-city {
 	font-size: 1.5rem;
 	background-color: transparent;
 	border: none;
-	color: white;
+	color: var(--accent);
 	padding: 1rem;
 	vertical-align: middle;
 	cursor: pointer;
+	transition: transform 0.5s;
 }
 
 /* Modules */
@@ -209,6 +215,14 @@ input[type="text"] {
 
 .temp-info > .unit-selector:active {
 	transform: rotate(25deg);
+}
+
+.search-city:active {
+	transform: scale(1.1) rotate(20deg);
+}
+
+input.city:focus {
+	outline: 1px solid white;
 }
 
 @keyframes fade-in {
