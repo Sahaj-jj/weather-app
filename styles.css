@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla:wght@200;400&display=swap");
 
 :root {
-	--background: rgb(126, 113, 113);
+	--background: rgb(99, 43, 52);
 	--main: rgb(255, 255, 255);
 	--accent: rgb(236, 98, 121);
 	--subtext: grey;
 	--inverse-subtext: rgba(255, 255, 255, 0.7);
+	--input: rgb(190, 165, 165);
 }
 
 *,
@@ -47,6 +48,22 @@ body {
 }
 
 input[type="text"] {
+	border: none;
+	border-radius: 20px;
+	padding: 0.5rem 2rem 0.5rem 0.7rem;
+	background-color: var(--input);
+	color: white;
+	font-weight: bold;
+}
+
+.search-city {
+	font-size: 1.5rem;
+	background-color: transparent;
+	border: none;
+	color: white;
+	padding: 1rem;
+	vertical-align: middle;
+	cursor: pointer;
 }
 
 /* Modules */
@@ -144,9 +161,13 @@ input[type="text"] {
 	align-self: flex-end;
 	font-size: 2rem;
 	margin-left: -1rem;
-	color: var(--accent);
-	width: fit-content;
+	color: white;
+	width: 3rem;
+	height: 2.6rem;
+	border-radius: 15px;
+	text-align: center;
 	transition: transform 200ms;
+	background-color: var(--accent);
 }
 
 .location-info > .weather-main {
@@ -156,10 +177,10 @@ input[type="text"] {
 
 .location-info > .city {
 	font-size: 1rem;
+	font-weight: bold;
 }
 
 .location-info > .country {
-	color: var(--subtext);
 	display: none;
 }
 
