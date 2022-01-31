@@ -66,10 +66,16 @@ input[type="text"]::placeholder {
 	background-color: transparent;
 	border: none;
 	color: var(--accent);
-	padding: 1rem;
+	padding-left: 1rem;
 	vertical-align: middle;
 	cursor: pointer;
 	transition: transform 0.5s;
+}
+
+.error-msg {
+	font-size: 0.8rem;
+	margin: 0.2rem 1rem;
+	color: rgb(255, 106, 106);
 }
 
 /* Modules */
