@@ -79,7 +79,7 @@ input[type="text"]::placeholder {
 	opacity: 0;
 }
 
-input.error + .error-msg {
+.error-msg.show {
 	opacity: 1;
 }
 
