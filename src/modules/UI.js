@@ -42,7 +42,7 @@ const UI = (() => {
   };
 
   const showError = (msg) => {
-    $cityInput.classList.add('error');
+    $errorMsg.classList.add('show');
     $errorMsg.textContent = `* ${msg}`;
   };
 
@@ -75,7 +75,7 @@ const UI = (() => {
   };
 
   const updateDOM = () => {
-    $cityInput.classList.remove('error');
+    $errorMsg.classList.remove('show');
     updateTemperatureDOM();
     const forecast = Forecast.getForecast();
     updateWeatherIcon(forecast);
