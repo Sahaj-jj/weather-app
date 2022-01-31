@@ -49,21 +49,21 @@ const UI = (() => {
 
   const updateWeatherIcon = (forecast) => {
     const weatherIcon = document.createElement('img');
-    weatherIcon.src = `http://openweathermap.org/img/wn/${forecast.icon}@2x.png`;
+    weatherIcon.src = `http://openweathermap.org/img/wn/${forecast.icon}@4x.png`;
     if ($weatherIcon.childElementCount) $weatherIcon.lastChild.remove();
     $weatherIcon.appendChild(weatherIcon);
   };
 
   const updateLocationDOM = (forecast) => {
     $weatherMain.textContent = forecast.main;
-    $city.textContent = forecast.city;
+    $city.textContent = `${forecast.city} ${forecast.country}`;
     $country.textContent = forecast.country;
     $time.textContent = forecast.time;
   };
 
   const updateExtraDOM = (forecast) => {
     $humidity.textContent = `${forecast.humidity}%`;
-    $windSpeed.textContent = `${forecast.windSpeed}m/s`;
+    $windSpeed.textContent = `${forecast.windSpeed} m/s`;
   };
 
   const updateDOM = () => {

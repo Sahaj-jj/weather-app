@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla:wght@200;400&display=swap");
 
 :root {
-	--background: rgb(224, 240, 220);
+	--background: rgb(126, 113, 113);
 	--main: rgb(255, 255, 255);
 	--accent: rgb(236, 98, 121);
+	--subtext: grey;
+	--inverse-subtext: rgba(255, 255, 255, 0.7);
 }
 
 *,
@@ -24,12 +26,14 @@ body {
 .main {
 	display: grid;
 	background-color: var(--main);
-	width: 60%;
+	width: 50%;
 	grid-template-rows: repeat(2, 1fr);
-	grid-template-columns: 1fr 1fr;
-	margin: 25vh auto;
-	padding: 40px 01px;
+	grid-template-columns: 70% 1fr;
+	margin: 5vh auto;
+	padding: 40px 30px 30px;
 	opacity: 0;
+	border-radius: 35px;
+	box-shadow: 2px 5px 5px 0 rgba(0, 0, 0, 0.15);
 }
 
 .main.loaded {
@@ -37,10 +41,12 @@ body {
 	animation: 0.5s ease-out 0s 1 fade-in;
 }
 
-@media only screen and (max-width: 768px) {
-	.main {
-		width: 100%;
-	}
+.input-container {
+	margin: 20vh auto 0;
+	width: fit-content;
+}
+
+input[type="text"] {
 }
 
 /* Modules */
@@ -50,14 +56,54 @@ body {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(2, 1fr);
+	border-right: 3px dotted var(--accent);
 }
 
 .location-info {
 	grid-area: 1/2/2/3;
+	display: flex;
+	flex-direction: column;
+	text-align: right;
+	justify-content: center;
+	padding: 0 4rem;
+	gap: 0.5rem;
 }
 
 .extra-info {
 	grid-area: 2/1/3/3;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 2rem 5rem;
+	background-color: var(--accent);
+	border-radius: 15px;
+	margin: 2rem auto 0;
+	gap: 4rem;
+	flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 768px) {
+	.main {
+		width: 100vw;
+		overflow-x: hidden;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.temp-info {
+		border: none;
+	}
+
+	.location-info {
+		padding: 0;
+		margin: 2rem auto;
+	}
+
+	.extra-info {
+		flex-direction: column;
+		margin: 0 auto;
+		width: 80vw;
+	}
 }
 
 /* Components */
@@ -67,6 +113,10 @@ body {
 	justify-self: right;
 	align-self: center;
 	margin-right: -1rem;
+}
+
+.temp-info > .weather-icon > img {
+	height: 150px;
 }
 
 .temp-info > .temperature {
@@ -82,6 +132,7 @@ body {
 .temp-info > .feels-like {
 	align-self: center;
 	font-size: 0.9rem;
+	margin-top: -2rem;
 }
 
 .temp-info > .feels-like > .feels-like-temp {
@@ -96,6 +147,37 @@ body {
 	color: var(--accent);
 	width: fit-content;
 	transition: transform 200ms;
+}
+
+.location-info > .weather-main {
+	font-size: 2.2rem;
+	color: var(--accent);
+}
+
+.location-info > .city {
+	font-size: 1rem;
+}
+
+.location-info > .country {
+	color: var(--subtext);
+	display: none;
+}
+
+.location-info > .time {
+	color: var(--subtext);
+	font-size: 0.8rem;
+}
+
+.extra-info .heading {
+	font-size: 1.8rem;
+	color: white;
+}
+
+.extra-info .content {
+	font-size: 1.1rem;
+	text-align: center;
+	margin-top: 0.6rem;
+	color: var(--inverse-subtext);
 }
 
 /* States */
