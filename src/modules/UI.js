@@ -3,6 +3,7 @@ import Forecast from './Forecast';
 const UI = (() => {
   const $cityInput = document.querySelector('input.city');
   const $searchBtn = document.querySelector('.search-city');
+  const $errorMsg = document.querySelector('.error-msg');
   const $main = document.querySelector('.main');
   const body = document.querySelector('body');
   // temp-info
@@ -23,8 +24,10 @@ const UI = (() => {
 
   const getCityInput = () => {
     let cityName = $cityInput.value.toLowerCase();
-    cityName = cityName[0].toUpperCase() + cityName.slice(1);
-    $cityInput.value = '';
+    if (cityName) {
+      cityName = cityName[0].toUpperCase() + cityName.slice(1);
+      $cityInput.value = '';
+    }
     return cityName;
   };
 
@@ -36,6 +39,10 @@ const UI = (() => {
       $main.classList.add('loaded');
       body.style.pointerEvents = 'auto';
     }
+  };
+
+  const showError = (msg) => {
+    $errorMsg.textContent = `* ${msg}`;
   };
 
   const updateTemperatureDOM = () => {
@@ -76,12 +83,16 @@ const UI = (() => {
 
   const populateWeather = async () => {
     const cityName = getCityInput();
+    if (!cityName) {
+      showError('Please Enter a City');
+      return;
+    }
     loading(true);
     // Wait for data being fetched
     const OK = await Forecast.loadContents(cityName);
     loading(false);
     if (!OK) {
-      console.log('Location not found');
+      showError('Location not found');
       return;
     }
     updateDOM();
