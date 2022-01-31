@@ -3,16 +3,27 @@ import Forecast from './Forecast';
 const UI = (() => {
   const $cityInput = document.querySelector('input.city');
   const $searchBtn = document.querySelector('.search-city');
-
+  const $main = document.querySelector('.main');
+  const body = document.querySelector('body');
+  // temp-info
   const $temp = document.querySelector('.temperature');
   const $feelsLikeTemp = document.querySelector('.feels-like-temp');
   const $unitSelector = document.querySelector('.unit-selector');
   const $weatherIcon = document.querySelector('.weather-icon');
-
-  const body = document.querySelector('body');
+  // location-info
+  const $weatherMain = document.querySelector('.weather-main');
+  const $city = document.querySelector('.location-info > .city');
+  const $country = document.querySelector('.country');
+  const $time = document.querySelector('.time');
+  // extra-info
+  const $tempMax = document.querySelector('.temp-max > .content');
+  const $tempMin = document.querySelector('.temp-min > .content');
+  const $humidity = document.querySelector('.humidity > .content');
+  const $windSpeed = document.querySelector('.wind > .content');
 
   const getCityInput = () => {
-    const cityName = $cityInput.value;
+    let cityName = $cityInput.value.toLowerCase();
+    cityName = cityName[0].toUpperCase() + cityName.slice(1);
     $cityInput.value = '';
     return cityName;
   };
@@ -20,7 +31,9 @@ const UI = (() => {
   const loading = (begin) => {
     if (begin) {
       body.style.pointerEvents = 'none';
+      $main.classList.remove('loaded');
     } else {
+      $main.classList.add('loaded');
       body.style.pointerEvents = 'auto';
     }
   };
@@ -30,15 +43,35 @@ const UI = (() => {
     $temp.textContent = `${Math.round(forecast.temp)}`;
     $feelsLikeTemp.textContent = `${Math.round(forecast.feelsLike)}°`;
     $unitSelector.textContent = `°${forecast.unit}`;
+    $tempMax.textContent = `${Math.round(forecast.tempMax)}°`;
+    $tempMin.textContent = `${Math.round(forecast.tempMin)}°`;
+  };
+
+  const updateWeatherIcon = (forecast) => {
+    const weatherIcon = document.createElement('img');
+    weatherIcon.src = `http://openweathermap.org/img/wn/${forecast.icon}@2x.png`;
+    if ($weatherIcon.childElementCount) $weatherIcon.lastChild.remove();
+    $weatherIcon.appendChild(weatherIcon);
+  };
+
+  const updateLocationDOM = (forecast) => {
+    $weatherMain.textContent = forecast.main;
+    $city.textContent = forecast.city;
+    $country.textContent = forecast.country;
+    $time.textContent = forecast.time;
+  };
+
+  const updateExtraDOM = (forecast) => {
+    $humidity.textContent = `${forecast.humidity}%`;
+    $windSpeed.textContent = `${forecast.windSpeed}m/s`;
   };
 
   const updateDOM = () => {
     updateTemperatureDOM();
     const forecast = Forecast.getForecast();
-    const weatherIcon = document.createElement('img');
-    weatherIcon.src = `http://openweathermap.org/img/w/${forecast.icon}.png`;
-    if ($weatherIcon.childElementCount) $weatherIcon.lastChild.remove();
-    $weatherIcon.appendChild(weatherIcon);
+    updateWeatherIcon(forecast);
+    updateLocationDOM(forecast);
+    updateExtraDOM(forecast);
   };
 
   const populateWeather = async () => {
