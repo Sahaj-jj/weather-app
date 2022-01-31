@@ -76,6 +76,11 @@ input[type="text"]::placeholder {
 	font-size: 0.8rem;
 	margin: 0.2rem 1rem;
 	color: rgb(255, 106, 106);
+	opacity: 0;
+}
+
+input.error + .error-msg {
+	opacity: 1;
 }
 
 /* Modules */
